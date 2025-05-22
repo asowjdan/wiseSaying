@@ -16,7 +16,7 @@ public class Main {
         int arrayindex;
         int mapindex;
 
-        String filePath = "C:/Users/asowj/IdeaProjects/test/src/main/resources/db/";
+        String filePath = "src/main/resources/db/";
 
         //ArrayList 인덱스 불러오기
         try {
