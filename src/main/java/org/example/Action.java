@@ -25,33 +25,31 @@ public class Action {
     }
 
     void modify() {
-        System.out.println("수정함");
+        System.out.println("id를 입력해 주세요.");
+        int id = scanner.nextInt();
+        scanner.nextLine();
     }
 
     static void notFound(String cmd) {
-        if(cmd.isEmpty()){
+        if (cmd.isEmpty() || !cmd.startsWith("삭제?")) {
             System.out.println("존재하지 않는 명령어입니다.");
-        }else {
-            String[] split = cmd.split("\\?");
-            if(!split[0].equals("삭제")){
-                System.out.println("존재하지 않는 명령어입니다.");
-            }else if(split.length != 2 || split[1].isEmpty()){
-                System.out.println("명령어를 바르게 작성해 주세요. ex) 삭제?id=1");
-            }else{
-                Action.delete(split[1]);
-            }
+            return;
         }
+
+        String[] split = cmd.split("\\?");
+        if (split.length != 2 || split[1].isEmpty() || !split[1].startsWith("id=")) {
+            System.out.println("명령어를 바르게 작성해 주세요. ex) 삭제?id=1");
+            return;
+        }
+
+        Action.delete(split[1]);
     }
+
 
     static void delete(String commend) {
         String[] cmdSplit = commend.split("=");
-
-        if(!cmdSplit[0].equals("id") || cmdSplit.length != 2){
-            System.out.println("명령어를 바르게 작성해 주세요. ex) 삭제?id=1");
-        }else{
-            int id = Integer.parseInt(cmdSplit[1]);
-            logic.delete(id);
-        }
+        int id = Integer.parseInt(cmdSplit[1]);
+        logic.delete(id);
     }
 
     void save() {
