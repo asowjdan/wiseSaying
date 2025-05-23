@@ -8,10 +8,10 @@ public class App {
 
     void run() {
         System.out.println("=============명언 앱====================");
-        while(true){
+        while(true) {
             System.out.print("명령) ");
             String cmd = scanner.nextLine().trim();
-            switch(cmd){
+            switch (cmd.split("\\?")[0]) {
                 case "등록":
                     action.regist();
                     break;
@@ -30,8 +30,11 @@ public class App {
                 case "종료":
                     action.end();
                     break;
+                case "삭제":
+                    action.delete(cmd);
+                    break;
                 default:
-                    Action.notFound(cmd);
+                    action.notFound(cmd);
                     break;
             }
         }
