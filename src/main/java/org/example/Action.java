@@ -49,9 +49,11 @@ public class Action {
     void save() {
         System.out.println("저장함");
     }
+
     void search() {
         System.out.println("검색함");
     }
+
     void end(){
         System.out.println("종료합니다.");
         System.exit(0);
