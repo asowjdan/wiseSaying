@@ -1,8 +1,8 @@
 package org.example;
 
-
 import java.util.Scanner;
 
+//입출력 파트
 public class Action {
     static Scanner scanner = new Scanner(System.in);
     static Logic logic = new Logic();
@@ -18,10 +18,9 @@ public class Action {
     void list() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
-        WiseSaying[] forListWiseSayings = logic.findForList();
-
-        for (WiseSaying wiseSaying : forListWiseSayings) {
-            System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.author, wiseSaying.content);
+        WiseSaying[] Lists = logic.findForList();
+        for (int i = Lists.length-1; i >= 0; i--) {
+            System.out.println(Lists[i].id + " / " + Lists[i].author + " / " + Lists[i].content);
         }
     }
 
@@ -34,10 +33,10 @@ public class Action {
             System.out.println("존재하지 않는 명령어입니다.");
         }else {
             String[] split = cmd.split("\\?");
-            if(!split[0].equals("삭제") || split.length != 2){
+            if(!split[0].equals("삭제")){
                 System.out.println("존재하지 않는 명령어입니다.");
-            }else if(split[1].isEmpty()){
-                System.out.println("명령어를 바르게 작성해 주세요");
+            }else if(split.length != 2 || split[1].isEmpty()){
+                System.out.println("명령어를 바르게 작성해 주세요. ex) 삭제?id=1");
             }else{
                 Action.delete(split[1]);
             }
@@ -46,8 +45,9 @@ public class Action {
 
     static void delete(String commend) {
         String[] cmdSplit = commend.split("=");
-        if(!cmdSplit[0].equals("id")){
-            System.out.println("존재하지 않는 명령어입니다.");
+
+        if(!cmdSplit[0].equals("id") || cmdSplit.length != 2){
+            System.out.println("명령어를 바르게 작성해 주세요. ex) 삭제?id=1");
         }else{
             int id = Integer.parseInt(cmdSplit[1]);
             logic.delete(id);
