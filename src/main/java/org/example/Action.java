@@ -24,9 +24,15 @@ public class Action {
         }
     }
 
-    void modify() {
-        System.out.println("id를 입력해 주세요.");
-        scanner.nextLine();
+    void modify(String commend) {
+        String[] split = commend.split("\\?");
+        if (split.length != 2 || split[1].isEmpty() || !split[1].startsWith("id=")) {
+            System.out.println("명령어를 바르게 작성해 주세요. ex) 수정?id=1");
+            return;
+        }
+        String[] cmdSplit = commend.split("=");
+        int id = Integer.parseInt(cmdSplit[1]);
+        logic.modify(id);
     }
 
     void notFound(String cmd) {

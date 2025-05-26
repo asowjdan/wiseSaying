@@ -35,6 +35,24 @@ public class Logic {
                 return;
             }
         }
-        System.out.println("존재하지 않는 명언입니다.");
+        System.out.println("삭제할 명언이 존재하지 않습니다.");
+    }
+
+    void modify(int id){
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        for (WiseSaying wiseSaying : wiseSayings)
+            if (wiseSaying.id == id) {
+                System.out.println("명언(기존) : " + wiseSaying.content);
+                System.out.print("명언) ");
+                String content = scanner.nextLine();
+                System.out.println("작성자(기존) : " + wiseSaying.author);
+                System.out.print("작성자) ");
+                String author = scanner.nextLine();
+                wiseSaying.content = content;
+                wiseSaying.author = author;
+                System.out.println("변경되었습니다.");
+                return;
+            }
+        System.out.println("변경할 명언이 존재하지 않습니다.");
     }
 }

@@ -20,7 +20,7 @@ public class App {
                     action.list();
                     break;
                 case "수정":
-                    action.modify();
+                    action.modify(cmd);
                     break;
                 case "저장":
                     action.save();
