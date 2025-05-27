@@ -86,10 +86,9 @@ public class Logic {
         File directory = new File("src/main/resources/db/wiseSaying/");
         if (!directory.exists()) {
             if (!directory.mkdirs()) {
-                System.err.println("디렉토리를 생성하는 데 실패했습니다: " + directory.getAbsolutePath());
+                return "명언 저장용 폴더 생성에 실패했습니다.";
             }
         }
-
         
         File file = new File(directory, wiseSaying.id + ".json");
         File lastIdFile = new File(directory, "LastId.txt");
@@ -112,17 +111,17 @@ public class Logic {
                 .findFirst()
                 .map(wiseSaying -> {
                     list.remove(wiseSaying);
-                    fileDelete(id);
-                    return "명언을 삭제했습니다.";
+                    return fileDelete(id);
                 })
                 .orElse("해당하는 명언이 없습니다.");
     }
 
-    void fileDelete(int id){
+    String fileDelete(int id){
         File file = new File("src/main/resources/db/wiseSaying/" + id + ".json");
         if (!file.delete()) {
-            System.err.println("파일 삭제에 실패했습니다: " + file.getAbsolutePath());
+            return "명언 파일 삭제에 실패했습니다.";
         }
+        return "명언을 삭제했습니다.";
     }
 
     ArrayList<WiseSaying> findForList(){
